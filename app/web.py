@@ -10,6 +10,14 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
+# ページ設定は必ず最初に実行（Streamlit の仕様）
+st.set_page_config(
+    page_title="eBay 画像盗用監視ツール",
+    page_icon="🔍",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
 # プロジェクトルートをパスに追加
 ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
@@ -17,15 +25,12 @@ if str(ROOT) not in sys.path:
 
 load_dotenv()
 
-from app.web_ui.pages import render_dashboard, render_results, render_run_page, render_settings
-
-# ページ設定
-st.set_page_config(
-    page_title="eBay 画像盗用監視ツール",
-    page_icon="🔍",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+try:
+    from app.web_ui.pages import render_dashboard, render_results, render_run_page, render_settings
+except Exception as e:
+    st.error("アプリの読み込みに失敗しました。")
+    st.exception(e)
+    st.stop()
 
 # セッション状態の初期化
 if "run_status" not in st.session_state:
@@ -47,42 +52,46 @@ _SIDEBAR_GUIDE = """
 **詳細は `使い方ガイド.md` を参照**
 """
 
-# サイドバー
-with st.sidebar:
-    # タイトルを1行で表示するためのカスタムCSS
-    st.markdown(
-        """
-        <style>
-        .sidebar-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-            padding: 0.25rem 0;
-        }
-        </style>
-        <div class="sidebar-title">🔍 eBay 画像盗用監視</div>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.markdown("---")
-    page = st.radio(
-        "ページ",
-        ["🏠 ダッシュボード", "⚙️ 設定", "▶️ 実行", "📊 結果確認"],
-    )
-    st.markdown("---")
-    with st.expander("❓ 使い方ガイド", expanded=False):
-        st.markdown(_SIDEBAR_GUIDE)
+# サイドバーとメインコンテンツ（エラー時は画面に表示）
+try:
+    with st.sidebar:
+        # タイトルを1行で表示するためのカスタムCSS
+        st.markdown(
+            """
+            <style>
+            .sidebar-title {
+                font-size: 0.95rem;
+                font-weight: 600;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 1.4;
+                margin-bottom: 0.5rem;
+                padding: 0.25rem 0;
+            }
+            </style>
+            <div class="sidebar-title">🔍 eBay 画像盗用監視</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown("---")
+        page = st.radio(
+            "ページ",
+            ["🏠 ダッシュボード", "⚙️ 設定", "▶️ 実行", "📊 結果確認"],
+        )
+        st.markdown("---")
+        with st.expander("❓ 使い方ガイド", expanded=False):
+            st.markdown(_SIDEBAR_GUIDE)
 
-# ページルーティング
-if page == "🏠 ダッシュボード":
-    render_dashboard()
-elif page == "⚙️ 設定":
-    render_settings()
-elif page == "▶️ 実行":
-    render_run_page()
-elif page == "📊 結果確認":
-    render_results()
+    # ページルーティング
+    if page == "🏠 ダッシュボード":
+        render_dashboard()
+    elif page == "⚙️ 設定":
+        render_settings()
+    elif page == "▶️ 実行":
+        render_run_page()
+    elif page == "📊 結果確認":
+        render_results()
+except Exception as e:
+    st.error("ページの表示中にエラーが発生しました。")
+    st.exception(e)
