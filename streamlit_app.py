@@ -20,6 +20,9 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# 最初に1要素表示（白画面対策・読み込み中表示）
+st.caption("読み込み中…")
+
 try:
     import app.web
 except Exception as e:
