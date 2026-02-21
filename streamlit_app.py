@@ -5,20 +5,23 @@ app/web.py の内容をそのまま使用。
 import sys
 from pathlib import Path
 
-# プロジェクトルートをパスに追加
+# プロジェクトルートをパスに追加（import より前に必須）
 ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import streamlit as st
 
-# 起動直後にページ設定（エラー表示のため）
+# 必ず最初にページ設定（Streamlit の仕様）
 st.set_page_config(
     page_title="eBay 画像盗用監視ツール",
     page_icon="🔍",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# 最初に1要素表示してから app を読み込む（白画面対策）
+st.caption("読み込み中…")
 
 try:
     import app.web

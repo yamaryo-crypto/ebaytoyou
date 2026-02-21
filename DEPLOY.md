@@ -195,6 +195,14 @@ Streamlit Community Cloud では、ファイルシステムは**一時的**で�
 
 ## 🔧 トラブルシューティング
 
+### 画面が真っ白な場合
+
+1. **Main file path を変更して試す**  
+   Streamlit Cloud のアプリ設定で、**Main file path** を `streamlit_app.py` から **`app/web.py`** に変更し、「Save」→「Reboot app」で再起動してください。  
+   （エントリを経由せず `app/web.py` を直接実行すると表示されることがあります。）
+
+2. 上記でも白いままなら、**Manage app** → **Logs** を開いた状態でアプリURLを開き、新しく出たログ（Traceback など）を確認してください。
+
 ### アプリが起動しない
 
 1. `requirements.txt` が正しく配置されているか確認
