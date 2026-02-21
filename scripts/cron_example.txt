@@ -1,0 +1,5 @@
+# 週1回 月曜 15:00 JST（サーバがJSTのとき）
+0 15 * * 1  cd /path/to/ebay-image-theft-monitor && .venv/bin/python -m app.main --once >> logs/run.log 2>&1
+
+# サーバが UTC のとき（15:00 JST = 06:00 UTC）
+0 6 * * 1  cd /path/to/ebay-image-theft-monitor && .venv/bin/python -m app.main --once >> logs/run.log 2>&1

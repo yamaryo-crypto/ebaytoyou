@@ -1,0 +1,28 @@
+run:
+  timezone: "Asia/Tokyo"
+  max_listings_per_run: 200   # 40品以上スキャンするため200以上推奨
+  max_images_per_listing: 3
+  candidates_per_image: 50
+  keyword_search_candidates: 100  # キーワード検索の候補数（リサイズ流用の一括検知用）
+  stop_on_first_match_per_image: true
+  max_concurrent_downloads: 10   # 候補画像の並列ダウンロード数（実行時間短縮）
+
+ebay:
+  search_limit: 200
+  search_sort: "newlyListed"
+
+match:
+  mode: "sha256_exact"
+  also_accept_same_image_url: true
+
+sheet:
+  output_type: "csv"           # "csv" = CSVファイル出力（無料）, "sheets" = Googleスプレッドシート
+  worksheet_name: "detections"
+  append_only: false
+  image_preview_formula: true
+
+message:
+  language: "ja"
+  tone: "strong"
+  deadline_hours: 24
+  mention_next_steps: true

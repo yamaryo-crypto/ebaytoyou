@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+
+# 設定ファイル（機密情報含む）
+.env
+config.yaml
+secrets/
+*.json
+!requirements.txt
+
+# データベース
+data/*.db
+data/*.db-journal
+
+# ログ
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 一時ファイル
+*.tmp
+*.bak
