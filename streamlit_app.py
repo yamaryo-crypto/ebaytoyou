@@ -10,5 +10,18 @@ ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-# app/web.py をインポート（実行される）
-import app.web
+import streamlit as st
+
+# 起動直後にページ設定（エラー表示のため）
+st.set_page_config(
+    page_title="eBay 画像盗用監視ツール",
+    page_icon="🔍",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+try:
+    import app.web
+except Exception as e:
+    st.error("アプリの読み込みに失敗しました。")
+    st.exception(e)

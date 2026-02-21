@@ -10,13 +10,16 @@ from pathlib import Path
 import streamlit as st
 from dotenv import load_dotenv
 
-# ページ設定は必ず最初に実行（Streamlit の仕様）
-st.set_page_config(
-    page_title="eBay 画像盗用監視ツール",
-    page_icon="🔍",
-    layout="wide",
-    initial_sidebar_state="expanded",
-)
+# ページ設定は必ず最初に実行（Streamlit の仕様）。streamlit_app.py から起動時は既に設定済みのためスキップ
+try:
+    st.set_page_config(
+        page_title="eBay 画像盗用監視ツール",
+        page_icon="🔍",
+        layout="wide",
+        initial_sidebar_state="expanded",
+    )
+except st.StreamlitAPIException:
+    pass
 
 # プロジェクトルートをパスに追加
 ROOT = Path(__file__).resolve().parent.parent
