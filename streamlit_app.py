@@ -20,11 +20,11 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# 最初に1要素表示（白画面対策・読み込み中表示）
-st.caption("読み込み中…")
-
-try:
-    import app.web
-except Exception as e:
-    st.error("アプリの読み込みに失敗しました。")
-    st.exception(e)
+# 読み込み中表示（白画面対策）。長時間動かない場合は Main file を app/web.py に変更してください
+with st.spinner("読み込み中…"):
+    try:
+        import app.web
+    except Exception as e:
+        st.error("アプリの読み込みに失敗しました。")
+        st.exception(e)
+        st.info("💡 このまま進まない場合は、Streamlit Cloud の **Settings** で **Main file path** を **`app/web.py`** に変更して再起動してください。")

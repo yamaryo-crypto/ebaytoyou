@@ -70,7 +70,7 @@ git push -u origin main
 2. 次のように入力：
    - **Repository**: `あなたのユーザー名/ebaynisemonotool`（プッシュしたリポジトリを選択）
    - **Branch**: `main`
-   - **Main file path**: `streamlit_app.py`
+   - **Main file path**: **`app/web.py`**（推奨。`streamlit_app.py` だと「読み込み中…」で止まることがあります）
 3. **「Deploy!」** をクリック
 
 初回はビルドに数分かかることがあります。完了すると、`https://xxxxx.streamlit.app` のような URL でアプリにアクセスできます。
@@ -195,13 +195,13 @@ Streamlit Community Cloud では、ファイルシステムは**一時的**で�
 
 ## 🔧 トラブルシューティング
 
-### 画面が真っ白な場合
+### 画面が真っ白・「読み込み中…」で止まる場合
 
-1. **Main file path を変更して試す**  
-   Streamlit Cloud のアプリ設定で、**Main file path** を `streamlit_app.py` から **`app/web.py`** に変更し、「Save」→「Reboot app」で再起動してください。  
-   （エントリを経由せず `app/web.py` を直接実行すると表示されることがあります。）
+1. **Main file path を `app/web.py` に変更する（推奨）**  
+   Streamlit Cloud のアプリで **⋮** → **Settings** を開き、**Main file path** を **`app/web.py`** に変更して **Save** → **Reboot app** で再起動してください。  
+   （`app/web.py` を直接実行すると、エントリ経由で起動したときより安定して表示されることが多いです。）
 
-2. 上記でも白いままなら、**Manage app** → **Logs** を開いた状態でアプリURLを開き、新しく出たログ（Traceback など）を確認してください。
+2. 上記でも改善しない場合は、**Manage app** → **Logs** を開いた状態でアプリURLを開き、新しく出たログ（Traceback など）を確認してください。
 
 ### アプリが起動しない
 
