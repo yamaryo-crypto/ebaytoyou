@@ -15,13 +15,21 @@ git clone https://github.com/yamaryo-crypto/ebaytoyou.git
 cd ebaytoyou
 ```
 
-### 2. Python の確認
+### 2. Cursor でプロジェクトを開く
+
+- **Cursor** を起動する
+- **File** → **Open Folder…** で、さきほどクローンした **`ebaytoyou` フォルダ** を選んで開く
+- これでノートPCの Cursor でこのツールのコードが開き、GitHub 連携（同じリポジトリ）の状態になります
+
+以降のコマンドは、Cursor 内の **ターミナル**（Terminal → New Terminal）で実行すると便利です。
+
+### 3. Python の確認
 
 - **Python 3.11 以上**が必要です。
 - 確認: `python3 --version`（Windows の場合は `python --version`）
 - 入っていない場合は [python.org](https://www.python.org/) からインストール（Windows では「Add Python to PATH」にチェック）
 
-### 3. 仮想環境を作成して有効化
+### 4. 仮想環境を作成して有効化
 
 **Mac / Linux:**
 ```bash
@@ -37,13 +45,13 @@ python -m venv .venv
 
 プロンプトの先頭に `(.venv)` が出ればOKです。
 
-### 4. 依存パッケージのインストール
+### 5. 依存パッケージのインストール
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. 設定ファイルを用意する
+### 6. 設定ファイルを用意する
 
 **今の Mac からコピーする方法（推奨）:**
 
@@ -56,7 +64,7 @@ pip install -r requirements.txt
 - `config.yaml.example` をコピーして `config.yaml` を作り、必要に応じて編集します。
 - eBay の Refresh Token は、ノートPCで初回だけ `scripts/get_new_refresh_token.py` を実行して取得する必要がある場合があります。
 
-### 6. Web UI を起動
+### 7. Web UI を起動
 
 ```bash
 streamlit run app/web.py
